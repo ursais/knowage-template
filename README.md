@@ -1,4 +1,4 @@
-# Template Project
+# Knowage Project Template
 
 ## Table of Contents
 * [Development](#Development)
@@ -16,7 +16,7 @@
 ```shell
 apt install docker-compose git
 cd /opt
-git clone https://github.com/ursais/template template
+git clone https://github.com/ursais/knowage-template
 ```
 
 ### Build
