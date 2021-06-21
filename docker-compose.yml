@@ -1,12 +1,37 @@
-version: '2'
+version: "3.1"
 services:
-  app:
-    build:
+  knowage:
+    image: knowagelabs/knowage-server-docker:7.0.0
+    depends_on:
+      - knowagedb
     ports:
-      - '8080:8080'
-    volumes:
-      - 'data:/data'
+      - "8080:8080"
+    networks:
+      - main
     environment:
+      - DB_USER=$DB_USER
+      - DB_PASS=$DB_PASS
+      - DB_DB=$DB_DB
+      - DB_HOST=$DB_HOST
+      - DB_PORT=$DB_PORT
+      - HMAC_KEY=abc123
+      - PUBLIC_ADDRESS=localhost
+ 
+  knowagedb:
+    image: mysql:5.7
+    environment:
+      - MYSQL_USER=$DB_USER
+      - MYSQL_PASSWORD=$DB_PASS
+      - MYSQL_DATABASE=$DB_DB
+      - MYSQL_ROOT_PASSWORD=$DB_ROOT_PASS
+    networks:
+      - main
+    volumes:
+      - "db:/var/lib/mysql"
 
 volumes:
-  data:
+  db:
+
+networks:
+  main:
+
